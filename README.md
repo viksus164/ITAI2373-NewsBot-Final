@@ -65,9 +65,10 @@ The project uses the BBC News Classification dataset from Kaggle. The dataset ZI
 
 1. Open `NewsBot2_Final_Project_Viktoriya_Kurmisheva.ipynb` in Google Colab.
 2. Run the setup/import cells from the top.
-3. When prompted, upload `learn-ai-bbc.zip`.
-4. Continue running the notebook cells in order.
-5. Near the end, run the Gradio web app cell to test the interactive dashboard.
+3. Download the required (learn-ai-bbc.zip) here: https://www.kaggle.com/competitions/learn-ai-bbc/data
+4. When prompted, upload `learn-ai-bbc.zip`. 
+5. Continue running the notebook cells in order.
+6. Near the end, run the Gradio web app cell to test the interactive dashboard.
 
 No paid API keys are required.
 
@@ -79,6 +80,6 @@ This was not one shared notebook project. Abraham Barreto and I worked as peer t
 
 - Do not upload `kaggle.json`.
 - Do not upload `learn-ai-bbc.zip`.
-- Do not upload extracted dataset folders such as `bbc_final_data/`.
+- Do not upload extracted dataset folders such as `bbc_final_data/`. 
 - Run the notebook cells in order because later sections depend on variables created earlier.
 - The BBC dataset does not include real publication dates, so generated analysis months are used only for trend demonstration.
