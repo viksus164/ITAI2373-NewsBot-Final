@@ -1,0 +1,11 @@
+bbc_final_data/
+data/raw/
+data/processed/
+data/models/
+web_app/data/extracted/
+web_app/data/*.zip
+*.zip
+*.pkl
+*.joblib
+__pycache__/
+.ipynb_checkpoints/

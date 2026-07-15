@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewsBot 2.0 Web App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="hero">
+            <div>
+                <p class="eyebrow">Bonus Web Application Frontend</p>
+                <h1>NewsBot 2.0 Intelligence System</h1>
+                <p class="subtitle">
+                    Analyze news articles with classification, sentiment, summarization,
+                    entities, topics, semantic matches, and business-friendly insights.
+                </p>
+            </div>
+        </header>
+
+        {% if error %}
+        <div class="alert">{{ error }}</div>
+        {% endif %}
+
+        <main>
+            <section class="panel">
+                <h2>Analyze a News Article</h2>
+                <form action="/analyze" method="POST" id="analysisForm">
+                    <label for="text">Paste article text</label>
+                    <textarea
+                        name="text"
+                        id="text"
+                        placeholder="Paste a full news article here. The first run may take a moment because the local model loads and trains from the BBC dataset."
+                        minlength="20"
+                        required>{{ text or "" }}</textarea>
+                    <div class="form-footer">
+                        <span><span id="charCount">0</span> characters</span>
+                        <button type="submit" id="submitButton">Analyze Article</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="feature-grid">
+                <article class="feature-card">
+                    <h3>Classification</h3>
+                    <p>Predicts BBC-style categories and shows model confidence.</p>
+                </article>
+                <article class="feature-card">
+                    <h3>Sentiment</h3>
+                    <p>Uses VADER scores to estimate article tone.</p>
+                </article>
+                <article class="feature-card">
+                    <h3>Summaries</h3>
+                    <p>Creates short extractive summaries from the article text.</p>
+                </article>
+                <article class="feature-card">
+                    <h3>Entities and Topics</h3>
+                    <p>Finds named entities and assigns discovered topic themes.</p>
+                </article>
+            </section>
+        </main>
+
+        <footer>
+            <a href="/about">About this project</a>
+        </footer>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

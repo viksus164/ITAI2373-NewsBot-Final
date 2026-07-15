@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About NewsBot 2.0</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="hero compact">
+            <div>
+                <p class="eyebrow">Project Overview</p>
+                <h1>About NewsBot 2.0</h1>
+                <p class="subtitle">A free local Flask frontend for the ITAI 2373 final project.</p>
+            </div>
+        </header>
+
+        <main class="panel">
+            <h2>What this web app does</h2>
+            <p>
+                This frontend turns the notebook-based NewsBot into a browser application.
+                A user can paste a news article and receive category prediction, confidence,
+                sentiment, summary, named entities, discovered topic, keywords, and similar
+                BBC articles.
+            </p>
+
+            <h2>Cost and APIs</h2>
+            <p>
+                This version does not use paid APIs. It trains lightweight local models from
+                the BBC News Classification dataset and runs on a local Flask server.
+            </p>
+
+            <h2>Portfolio value</h2>
+            <p>
+                The web app demonstrates that the NLP pipeline can support a user-facing
+                product, not only a notebook. This supports the final project's optional
+                web application frontend bonus.
+            </p>
+
+            <a href="/" class="button-secondary">Back to app</a>
+        </main>
+    </div>
+</body>
+</html>

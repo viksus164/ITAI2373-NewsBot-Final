@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewsBot Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="hero compact">
+            <div>
+                <p class="eyebrow">Analysis Results</p>
+                <h1>{{ result.category|title }} News</h1>
+                <p class="subtitle">
+                    Confidence: {{ "%.1f"|format(result.confidence * 100) }}% |
+                    Sentiment: {{ result.sentiment.label|title }} |
+                    Words: {{ result.statistics.word_count }}
+                </p>
+            </div>
+        </header>
+
+        <main class="results-layout">
+            <section class="panel">
+                <h2>Summary</h2>
+                <p>{{ result.summary }}</p>
+            </section>
+
+            <section class="panel">
+                <h2>Key Insights</h2>
+                <ul>
+                    {% for insight in result.insights %}
+                    <li>{{ insight }}</li>
+                    {% endfor %}
+                </ul>
+            </section>
+
+            <section class="panel">
+                <h2>Category Probabilities</h2>
+                {% for category, probability in result.probabilities.items() %}
+                <div class="bar-row">
+                    <span>{{ category|title }}</span>
+                    <div class="bar">
+                        <div class="bar-fill" style="width: {{ probability * 100 }}%"></div>
+                    </div>
+                    <strong>{{ "%.1f"|format(probability * 100) }}%</strong>
+                </div>
+                {% endfor %}
+            </section>
+
+            <section class="panel">
+                <h2>Sentiment Scores</h2>
+                <div class="stats-grid">
+                    <div class="stat-card"><strong>{{ "%.3f"|format(result.sentiment.compound) }}</strong><span>Compound</span></div>
+                    <div class="stat-card"><strong>{{ "%.3f"|format(result.sentiment.pos) }}</strong><span>Positive</span></div>
+                    <div class="stat-card"><strong>{{ "%.3f"|format(result.sentiment.neu) }}</strong><span>Neutral</span></div>
+                    <div class="stat-card"><strong>{{ "%.3f"|format(result.sentiment.neg) }}</strong><span>Negative</span></div>
+                </div>
+            </section>
+
+            <section class="panel">
+                <h2>Entities</h2>
+                {% if result.entities %}
+                <div class="chip-grid">
+                    {% for entity in result.entities %}
+                    <span class="chip">{{ entity.text }} <em>{{ entity.label }}</em></span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p>No major named entities found.</p>
+                {% endif %}
+            </section>
+
+            <section class="panel">
+                <h2>Topic and Keywords</h2>
+                <p><strong>Topic {{ result.topic.topic_id }}:</strong> {{ result.topic.top_words|join(", ") }}</p>
+                <p><strong>Keywords:</strong> {{ result.keywords|join(", ") }}</p>
+            </section>
+
+            <section class="panel">
+                <h2>Similar Articles from BBC Dataset</h2>
+                {% for article in result.similar_articles %}
+                <div class="similar-card">
+                    <strong>{{ article.title }}</strong>
+                    <span>{{ article.category|title }} | Similarity {{ "%.3f"|format(article.similarity) }}</span>
+                </div>
+                {% endfor %}
+            </section>
+
+            <section class="panel">
+                <h2>Original Text Preview</h2>
+                <p class="preview">{{ result.processed_preview }}</p>
+            </section>
+        </main>
+
+        <div class="actions">
+            <a href="/" class="button-secondary">Analyze Another Article</a>
+            <button onclick="downloadResults()" class="button-secondary">Download JSON</button>
+        </div>
+    </div>
+
+    <script>
+        const analysisResults = {{ result|tojson }};
+        const originalText = {{ original_text|tojson }};
+    </script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
